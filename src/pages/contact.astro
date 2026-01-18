@@ -1,0 +1,141 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Contact · Shipyard Church" description="Get in touch with Shipyard Church in Plymouth, MA. We'd love to hear from you.">
+  <Header activePage="contact" />
+
+  <div class="page-header">
+    <div class="page-header-inner">
+      <h1 class="page-title">Contact Us</h1>
+      <p class="page-subtitle">We'd love to hear from you</p>
+    </div>
+  </div>
+
+  <main class="content">
+    <p class="intro">Have a question about Shipyard? Curious about visiting? Just want to say hello? Drop us a note and we'll get back to you.</p>
+
+    <form class="form" action="https://formspree.io/f/[YOUR_FORM_ID]" method="POST">
+      <!-- Honeypot spam protection -->
+      <input type="text" name="_gotcha" style="display:none">
+
+      <div class="form-group">
+        <label class="form-label" for="name">Name</label>
+        <input type="text" id="name" name="name" class="form-input" placeholder="Your name" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="email">Email</label>
+        <input type="email" id="email" name="email" class="form-input" placeholder="you@example.com" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="message">Message</label>
+        <textarea id="message" name="message" class="form-input form-textarea" placeholder="What's on your mind?" required></textarea>
+      </div>
+
+      <button type="submit" class="form-submit">Send Message</button>
+    </form>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .content {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+
+  .intro {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+    text-align: center;
+  }
+
+  .form {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: 0 1px 3px rgba(61, 54, 48, 0.04);
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--warm-black);
+    margin-bottom: 0.5rem;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    font-size: 1rem;
+    font-family: inherit;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--cream);
+    color: var(--warm-black);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  }
+
+  .form-input::placeholder {
+    color: var(--text-muted);
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-color: var(--sand);
+    background: var(--white);
+    box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.15);
+  }
+
+  .form-textarea {
+    min-height: 140px;
+    resize: vertical;
+    line-height: 1.6;
+  }
+
+  .form-submit {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: inherit;
+    background: var(--rust);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.15s ease;
+  }
+
+  .form-submit:hover {
+    background: var(--rust-light);
+    transform: translateY(-1px);
+  }
+
+  .form-submit:active {
+    transform: translateY(0);
+  }
+
+  @media (max-width: 900px) {
+    .content {
+      padding: 2.5rem 1.5rem;
+    }
+
+    .form {
+      padding: 2rem 1.5rem;
+    }
+  }
+</style>

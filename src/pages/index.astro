@@ -1,11 +1,423 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Shipyard Church · Plymouth, MA">
+  <Header />
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-inner">
+        <span class="hero-series">Current Series</span>
+        <h1 class="hero-title">Joshua: Encouraged by What's Ahead</h1>
+        <p class="hero-lesson">This Sunday: Crossing Over</p>
+        <p class="hero-scripture">Joshua 3:1–17</p>
+        <div class="calendar-dropdown">
+          <button class="btn-primary" aria-expanded="false" aria-haspopup="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            Add to Calendar
+          </button>
+          <div class="calendar-menu" role="menu">
+            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Shipyard+Church+Gathering&dates=20251207T150000Z/20251207T163000Z&location=Loring+Center,+384+Court+St,+Plymouth,+MA+02360&recur=RRULE:FREQ=WEEKLY;BYDAY=SU" target="_blank" rel="noopener" role="menuitem">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+              Google Calendar
+            </a>
+            <a href="data:text/calendar;charset=utf-8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//Shipyard Church//EN%0ABEGIN:VEVENT%0ADTSTART:20251207T150000Z%0ADTEND:20251207T163000Z%0ARRULE:FREQ=WEEKLY;BYDAY=SU%0ASUMMARY:Shipyard Church Gathering%0ALOCATION:Loring Center, 384 Court St, Plymouth, MA 02360%0ADESCRIPTION:Sunday gathering at Shipyard Church.%0AEND:VEVENT%0AEND:VCALENDAR" download="shipyard-church.ics" role="menuitem">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              Download .ICS
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="location">
+    <div class="location-inner">
+      <div class="location-content">
+        <span class="location-label">Join Us</span>
+        <h2 class="location-time">Sundays at 10 AM</h2>
+        <p class="location-address">
+          Loring Center<br>
+          384 Court St, Plymouth, MA 02360
+        </p>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=384+Court+St,+Plymouth,+MA+02360" class="location-link" target="_blank" rel="noopener">
+          Get Directions
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+      <div class="location-map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2959.876!2d-70.6937!3d41.9785!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e4bd56c4a3d1a7%3A0x8f5a5c8e5b5e5c5e!2s384%20Court%20St%2C%20Plymouth%2C%20MA%2002360!5e0!3m2!1sen!2sus!4v1701388800000!5m2!1sen!2sus"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Map to Shipyard Church at Loring Center">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
 </Layout>
+
+<script>
+  // Calendar dropdown
+  const calendarBtn = document.querySelector('.calendar-dropdown .btn-primary');
+  const calendarMenu = document.querySelector('.calendar-menu');
+
+  calendarBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = calendarMenu?.classList.toggle('open');
+    calendarBtn.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  // Close dropdowns when clicking outside
+  document.addEventListener('click', (e) => {
+    const target = e.target as Element;
+    if (!target.closest('.calendar-dropdown')) {
+      calendarMenu?.classList.remove('open');
+      calendarBtn?.setAttribute('aria-expanded', 'false');
+    }
+  });
+</script>
+
+<style>
+  /* Hero */
+  .hero {
+    position: relative;
+    min-height: 520px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 0%, rgba(92, 107, 74, 0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at 90% 80%, rgba(139, 90, 60, 0.12) 0%, transparent 40%),
+      linear-gradient(
+        135deg,
+        #3d3630 0%,
+        #4a433c 20%,
+        #5c5347 40%,
+        #5c6b4a 70%,
+        #4a5a3a 100%
+      );
+  }
+
+  .hero-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21.184 20c.357-.13.72-.264 1.088-.402l1.768-.661C33.64 15.347 39.647 14 50 14c10.271 0 15.362 1.222 24.629 4.928.955.383 1.869.74 2.75 1.072h6.225c-2.51-.73-5.139-1.691-8.233-2.928C65.888 13.278 60.562 12 50 12c-10.626 0-16.855 1.397-26.66 5.063l-1.767.662c-2.475.923-4.66 1.674-6.724 2.275h6.335zm0-20C13.258 2.892 8.077 4 0 4V2c5.744 0 9.951-.574 14.85-2h6.334zM77.38 0C85.239 2.966 90.502 4 100 4V2c-6.842 0-11.386-.542-16.396-2h-6.225zM0 14c8.44 0 13.718-1.21 22.272-4.402l1.768-.661C33.64 5.347 39.647 4 50 4c10.271 0 15.362 1.222 24.629 4.928C84.112 12.722 89.438 14 100 14v-2c-10.271 0-15.362-1.222-24.629-4.928C65.888 3.278 60.562 2 50 2 39.374 2 33.145 3.397 23.34 7.063l-1.767.662C13.223 10.84 8.163 12 0 12v2z' fill='%23ffffff' fill-opacity='0.015' fill-rule='evenodd'/%3E%3C/svg%3E");
+    opacity: 0.6;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      rgba(29, 25, 23, 0.88) 0%,
+      rgba(29, 25, 23, 0.72) 40%,
+      rgba(29, 25, 23, 0.45) 70%,
+      rgba(29, 25, 23, 0.25) 100%
+    );
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+
+  .hero-inner {
+    max-width: 540px;
+  }
+
+  .hero-series {
+    display: inline-block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--sand);
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+
+  .hero-title {
+    font-family: 'Lora', Georgia, serif;
+    font-size: clamp(2rem, 5vw, 2.75rem);
+    font-weight: 500;
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-lesson {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.375rem;
+    font-weight: 400;
+  }
+
+  .hero-scripture {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.55);
+    margin-bottom: 2rem;
+    font-style: italic;
+    font-family: 'Lora', Georgia, serif;
+  }
+
+  /* Calendar dropdown */
+  .calendar-dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    background: var(--sand);
+    color: var(--warm-black);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.875rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  }
+
+  .btn-primary:hover {
+    background: var(--sand-light);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(212, 165, 116, 0.3);
+  }
+
+  .btn-primary svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .calendar-menu {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 0;
+    background: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 8px 32px rgba(61, 54, 48, 0.18);
+    overflow: hidden;
+    min-width: 220px;
+    z-index: 10;
+  }
+
+  .calendar-menu.open {
+    display: block;
+    animation: fadeUp 0.2s ease;
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .calendar-menu a {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    font-size: 0.9rem;
+    color: var(--warm-black);
+    text-decoration: none;
+    border-bottom: 1px solid var(--cream);
+    transition: background 0.15s ease;
+  }
+
+  .calendar-menu a:last-child {
+    border-bottom: none;
+  }
+
+  .calendar-menu a:hover {
+    background: var(--cream);
+  }
+
+  .calendar-menu svg {
+    width: 18px;
+    height: 18px;
+    color: var(--rust);
+    flex-shrink: 0;
+  }
+
+  /* Location section */
+  .location {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .location-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3rem;
+  }
+
+  .location-content {
+    flex: 1;
+  }
+
+  .location-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--rust);
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+    display: block;
+  }
+
+  .location-time {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1.75rem;
+    font-weight: 500;
+    color: var(--warm-black);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .location-address {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .location-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--navy);
+    text-decoration: none;
+    font-weight: 600;
+    transition: gap 0.2s ease;
+  }
+
+  .location-link:hover {
+    gap: 0.75rem;
+  }
+
+  .location-link svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .location-map {
+    width: 380px;
+    height: 200px;
+    background: var(--cream);
+    border-radius: 12px;
+    overflow: hidden;
+    flex-shrink: 0;
+    box-shadow: 0 2px 12px rgba(61, 54, 48, 0.06);
+  }
+
+  .location-map iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  @media (max-width: 900px) {
+    .hero {
+      min-height: auto;
+    }
+
+    .hero-content {
+      padding: 3rem 1.5rem 3.5rem;
+    }
+
+    .hero-overlay {
+      background: linear-gradient(
+        to top,
+        rgba(29, 25, 23, 0.92) 0%,
+        rgba(29, 25, 23, 0.75) 50%,
+        rgba(29, 25, 23, 0.5) 100%
+      );
+    }
+
+    .hero-inner {
+      max-width: 100%;
+    }
+
+    .hero-title {
+      font-size: 1.875rem;
+    }
+
+    .btn-primary {
+      width: 100%;
+      justify-content: center;
+      padding: 1rem 1.5rem;
+    }
+
+    .calendar-menu {
+      bottom: auto;
+      top: calc(100% + 8px);
+      left: 0;
+      right: 0;
+      min-width: auto;
+    }
+
+    .location-inner {
+      flex-direction: column;
+      padding: 2.5rem 1.5rem;
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .location-map {
+      width: 100%;
+      height: 180px;
+    }
+  }
+</style>

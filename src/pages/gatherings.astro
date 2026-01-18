@@ -1,0 +1,314 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const currentSeries = {
+  title: "Joshua: Encouraged by What's Ahead",
+  lessons: [
+    { date: "December 1, 2025", title: "Crossing Over", scripture: "Joshua 3:1–17", slug: "crossing-over" },
+    { date: "November 24, 2025", title: "Be Strong and Courageous", scripture: "Joshua 1:1–9", slug: "be-strong-and-courageous" },
+    { date: "November 17, 2025", title: "The Promise Ahead", scripture: "Joshua 1:10–18", slug: "the-promise-ahead" },
+  ]
+};
+
+const pastSeries = {
+  title: "Light, Love and Life Through Jesus",
+  count: 6,
+  lessons: [
+    { date: "September 28, 2025", title: "We Can Know", scripture: "1 John 5:1–21", slug: "we-can-know" },
+    { date: "September 6, 2025", title: "Abiding in the Light", scripture: "1 John 2:1–27", slug: "abiding-in-the-light" },
+    { date: "August 30, 2025", title: "Walking in the Light", scripture: "1 John 1:1–10", slug: "walking-in-the-light" },
+  ]
+};
+
+const events = [
+  { date: "Sunday, December 22", name: "Christmas Gathering", details: "Special time of carols, Scripture reading, and fellowship. Bring a dessert to share." },
+  { date: "Sunday, December 29", name: "Year-End Reflection", details: "Looking back at what God has done in 2025 and praying into the new year together." },
+];
+---
+
+<Layout title="Gatherings · Shipyard Church" description="Lessons, notes, and upcoming events from Shipyard Church gatherings.">
+  <Header activePage="gatherings" />
+
+  <div class="page-header">
+    <div class="page-header-inner">
+      <h1 class="page-title">Gatherings</h1>
+      <p class="page-subtitle">Lessons, notes, and upcoming events</p>
+    </div>
+  </div>
+
+  <main class="content">
+    <section class="series">
+      <div class="series-header">
+        <h2 class="series-title">{currentSeries.title}</h2>
+        <span class="series-badge">Current Series</span>
+      </div>
+      <div class="lessons-grid">
+        {currentSeries.lessons.map((lesson) => (
+          <a href={`/lesson/${lesson.slug}`} class="lesson-card">
+            <div class="lesson-image"></div>
+            <div class="lesson-content">
+              <span class="lesson-date">{lesson.date}</span>
+              <h3 class="lesson-title">{lesson.title}</h3>
+              <p class="lesson-scripture">{lesson.scripture}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="series">
+      <div class="series-header">
+        <h2 class="series-title">{pastSeries.title}</h2>
+        <span class="series-count">{pastSeries.count} lessons</span>
+      </div>
+      <div class="lessons-grid">
+        {pastSeries.lessons.map((lesson) => (
+          <a href={`/lesson/${lesson.slug}`} class="lesson-card">
+            <div class="lesson-image"></div>
+            <div class="lesson-content">
+              <span class="lesson-date">{lesson.date}</span>
+              <h3 class="lesson-title">{lesson.title}</h3>
+              <p class="lesson-scripture">{lesson.scripture}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="events">
+      <h2 class="events-title">Upcoming Events</h2>
+      <div class="events-grid">
+        {events.map((event) => (
+          <article class="event-card">
+            <span class="event-date">{event.date}</span>
+            <h3 class="event-name">{event.name}</h3>
+            <p class="event-details">{event.details}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+
+  /* Series */
+  .series {
+    margin-bottom: 4rem;
+  }
+
+  .series-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.875rem;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .series-title {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1.35rem;
+    font-weight: 500;
+    color: var(--warm-black);
+  }
+
+  .series-badge {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    background: var(--sand);
+    color: var(--warm-black);
+    padding: 0.3rem 0.75rem;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+
+  .series-count {
+    font-size: 0.85rem;
+    color: var(--rust);
+    font-weight: 500;
+  }
+
+  .lessons-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .lesson-card {
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(61, 54, 48, 0.04);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+  }
+
+  .lesson-card:hover {
+    box-shadow: 0 8px 24px rgba(61, 54, 48, 0.1);
+    transform: translateY(-4px);
+  }
+
+  .lesson-image {
+    height: 140px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .lesson-card:nth-child(3n+1) .lesson-image {
+    background: linear-gradient(135deg, #8b5a3c 0%, #a06a48 40%, #5c6b4a 100%);
+  }
+
+  .lesson-card:nth-child(3n+2) .lesson-image {
+    background: linear-gradient(135deg, #5c6b4a 0%, #6b7a56 40%, #3d3630 100%);
+  }
+
+  .lesson-card:nth-child(3n+3) .lesson-image {
+    background: linear-gradient(135deg, #3d3630 0%, #57534e 30%, #8b5a3c 80%, #d4a574 100%);
+  }
+
+  .lesson-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='15' viewBox='0 0 60 15' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 15c10 0 10-8 20-8s10 8 20 8 10-8 20-8' fill='none' stroke='%23ffffff' stroke-opacity='0.08' stroke-width='1'/%3E%3C/svg%3E");
+    background-size: 60px 15px;
+    background-position: center;
+  }
+
+  .lesson-content {
+    padding: 1.25rem 1.5rem 1.5rem;
+  }
+
+  .lesson-date {
+    font-size: 0.7rem;
+    color: var(--rust);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.375rem;
+    display: block;
+  }
+
+  .lesson-title {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--warm-black);
+    margin-bottom: 0.375rem;
+    line-height: 1.35;
+  }
+
+  .lesson-scripture {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-style: italic;
+    font-family: 'Lora', Georgia, serif;
+  }
+
+  /* Events */
+  .events {
+    background: var(--olive);
+    border-radius: 16px;
+    padding: 3rem;
+    margin-top: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .events::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='15' viewBox='0 0 60 15' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 15c10 0 10-8 20-8s10 8 20 8 10-8 20-8' fill='none' stroke='%23ffffff' stroke-opacity='0.05' stroke-width='1'/%3E%3C/svg%3E");
+    background-size: 60px 15px;
+    pointer-events: none;
+  }
+
+  .events-title {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1.35rem;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+
+  .events-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    position: relative;
+  }
+
+  .event-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    color: var(--white);
+    backdrop-filter: blur(4px);
+    transition: background 0.2s ease;
+  }
+
+  .event-card:hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .event-date {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .event-name {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+
+  .event-details {
+    font-size: 0.9rem;
+    opacity: 0.85;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 900px) {
+    .content {
+      padding: 2rem 1.5rem;
+    }
+
+    .series-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .lessons-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .events {
+      padding: 2rem 1.5rem;
+    }
+
+    .events-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

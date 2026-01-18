@@ -1,0 +1,84 @@
+---
+
+---
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="footer-logo">Shipyard Church</span>
+      <span class="footer-tagline">Come, Grow, Share, Go — together</span>
+    </div>
+    <svg class="footer-anchor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="5" r="3"/>
+      <line x1="12" y1="22" x2="12" y2="8"/>
+      <path d="M5 12H2a10 10 0 0 0 20 0h-3"/>
+    </svg>
+    <span class="footer-copy">&copy; 2025 Shipyard Church · Plymouth, MA</span>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--warm-black);
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    position: relative;
+  }
+
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .footer-logo {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1.1rem;
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  .footer-tagline {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.4);
+    font-style: italic;
+    font-family: 'Lora', Georgia, serif;
+  }
+
+  .footer-copy {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  .footer-anchor {
+    width: 24px;
+    height: 24px;
+    color: rgba(255, 255, 255, 0.15);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  @media (max-width: 900px) {
+    .footer-inner {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+      padding: 1.5rem;
+    }
+
+    .footer-anchor {
+      position: static;
+      transform: none;
+      margin-top: 0.5rem;
+    }
+  }
+</style>

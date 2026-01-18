@@ -1,0 +1,165 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Historic Creeds · Shipyard Church" description="The Apostles', Nicene, and Chalcedonian creeds — historic statements of Christian faith.">
+  <Header activePage="about" />
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <div class="breadcrumb-inner">
+      <a href="/about">About</a>
+      <span class="breadcrumb-sep">&rsaquo;</span>
+      <a href="/beliefs">What We Believe</a>
+      <span class="breadcrumb-sep">&rsaquo;</span>
+      <span class="breadcrumb-current">Historic Creeds</span>
+    </div>
+  </nav>
+
+  <div class="page-header no-border">
+    <div class="page-header-inner">
+      <h1 class="page-title">Historic Creeds</h1>
+      <p class="page-subtitle">Ancient statements of Christian faith</p>
+    </div>
+  </div>
+
+  <main class="content">
+    <article class="creed">
+      <h2 class="creed-title">The Apostles' Creed</h2>
+      <p class="creed-date">c. 2nd–4th century</p>
+      <div class="creed-text">
+        <p>I believe in God, the Father almighty,<br>
+        creator of heaven and earth.</p>
+        <p>I believe in Jesus Christ, his only Son, our Lord,<br>
+        who was conceived by the Holy Spirit<br>
+        and born of the virgin Mary.<br>
+        He suffered under Pontius Pilate,<br>
+        was crucified, died, and was buried;<br>
+        he descended to hell.<br>
+        The third day he rose again from the dead.<br>
+        He ascended to heaven<br>
+        and is seated at the right hand of God the Father almighty.<br>
+        From there he will come to judge the living and the dead.</p>
+        <p>I believe in the Holy Spirit,<br>
+        the holy catholic church,<br>
+        the communion of saints,<br>
+        the forgiveness of sins,<br>
+        the resurrection of the body,<br>
+        and the life everlasting. Amen.</p>
+      </div>
+    </article>
+
+    <article class="creed">
+      <h2 class="creed-title">The Nicene Creed</h2>
+      <p class="creed-date">AD 325 / 381</p>
+      <div class="creed-text">
+        <p>We believe in one God,<br>
+        the Father almighty,<br>
+        maker of heaven and earth,<br>
+        of all things visible and invisible.</p>
+        <p>And in one Lord Jesus Christ,<br>
+        the only Son of God,<br>
+        begotten from the Father before all ages,<br>
+        God from God,<br>
+        Light from Light,<br>
+        true God from true God,<br>
+        begotten, not made;<br>
+        of the same essence as the Father.<br>
+        Through him all things were made.<br>
+        For us and for our salvation<br>
+        he came down from heaven;<br>
+        he became incarnate by the Holy Spirit and the virgin Mary,<br>
+        and was made human.<br>
+        He was crucified for us under Pontius Pilate;<br>
+        he suffered and was buried.<br>
+        The third day he rose again, according to the Scriptures.<br>
+        He ascended to heaven<br>
+        and is seated at the right hand of the Father.<br>
+        He will come again with glory<br>
+        to judge the living and the dead.<br>
+        His kingdom will never end.</p>
+        <p>And we believe in the Holy Spirit,<br>
+        the Lord, the giver of life.<br>
+        He proceeds from the Father and the Son,<br>
+        and with the Father and the Son is worshiped and glorified.<br>
+        He spoke through the prophets.<br>
+        We believe in one holy catholic and apostolic church.<br>
+        We affirm one baptism for the forgiveness of sins.<br>
+        We look forward to the resurrection of the dead,<br>
+        and to life in the world to come. Amen.</p>
+      </div>
+    </article>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .page-header.no-border {
+    border-bottom: none;
+  }
+
+  .content {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+
+  .creed {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 3rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 1px 3px rgba(61, 54, 48, 0.04);
+  }
+
+  .creed:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .creed-title {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--warm-black);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .creed-date {
+    font-size: 0.85rem;
+    color: var(--rust);
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+  }
+
+  .creed-text {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: var(--text-secondary);
+  }
+
+  .creed-text p {
+    margin-bottom: 1rem;
+  }
+
+  .creed-text p:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 900px) {
+    .content {
+      padding: 2.5rem 1.5rem;
+    }
+
+    .creed {
+      padding: 2rem 1.5rem;
+    }
+
+    .creed-title {
+      font-size: 1.35rem;
+    }
+  }
+</style>

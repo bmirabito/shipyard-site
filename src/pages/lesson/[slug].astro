@@ -1,0 +1,560 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+export function getStaticPaths() {
+  const lessons = [
+    {
+      slug: 'crossing-over',
+      title: 'Crossing Over',
+      date: 'December 1, 2025',
+      scripture: 'Joshua 3:1–17',
+      series: "Joshua: Encouraged by What's Ahead",
+      quote: '"And as soon as the priests who carry the ark of the Lord—the Lord of all the earth—set foot in the Jordan, its waters flowing downstream will be cut off and stand up in a heap."',
+      quoteRef: '— Joshua 3:13 (NIV)',
+      summary: [
+        "After 40 years in the wilderness, Israel stands at the edge of the Jordan River. The generation that left Egypt has passed, and a new generation is ready to inherit what God promised.",
+        "But there's a problem. The Jordan is at flood stage. Crossing seems impossible. Yet God's instruction is clear: the priests must step into the water first. Only then will He act.",
+        "This is the pattern of faith throughout Scripture. God often asks us to move before He moves. Not recklessly—but obediently. The priests didn't jump in blindly. They followed God's specific instruction, carrying the ark of His presence with them.",
+        "What's ahead for you? What Jordan are you facing? The lesson of Joshua 3 is that we don't need to see the full path before we step forward. We need to know the One who parts the waters."
+      ],
+      questions: [
+        "Why do you think God asked the priests to step into the water before He parted it? What does this tell us about how faith works?",
+        "The Israelites had to wait three days before crossing. How do you handle seasons of waiting when you know something is coming but it hasn't arrived yet?",
+        "Where in your life is God asking you to step forward before you see the full path?",
+        'The 12 stones were set up as a memorial so future generations would ask, "What do these stones mean?" What memorials or markers remind you of God\'s faithfulness in your own life?'
+      ],
+      prevLesson: { slug: 'be-strong-and-courageous', title: 'Be Strong and Courageous' },
+      nextLesson: { slug: 'stones-of-remembrance', title: 'Stones of Remembrance' }
+    },
+    {
+      slug: 'be-strong-and-courageous',
+      title: 'Be Strong and Courageous',
+      date: 'November 24, 2025',
+      scripture: 'Joshua 1:1–9',
+      series: "Joshua: Encouraged by What's Ahead",
+      quote: '"Have I not commanded you? Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go."',
+      quoteRef: '— Joshua 1:9 (NIV)',
+      summary: [
+        "Moses is dead. The greatest leader Israel has ever known is gone. Now Joshua must step into an impossible role: leading God's people into the Promised Land.",
+        "Three times in this passage, God tells Joshua to be strong and courageous. Why the repetition? Because the task ahead is daunting—and God knows Joshua needs to hear it.",
+        "But notice what God doesn't say. He doesn't say 'Be strong because you're capable.' He says 'Be strong because I am with you.' The source of Joshua's courage isn't his own skill or experience. It's God's presence.",
+        "What impossible situation are you facing? The same God who promised to be with Joshua promises to be with you."
+      ],
+      questions: [
+        "Why do you think God repeated 'be strong and courageous' three times?",
+        "How does knowing God is with you change how you approach difficult situations?",
+        "What 'land' is God calling you to step into right now?",
+        "How can we encourage one another to be strong and courageous?"
+      ],
+      prevLesson: { slug: 'the-promise-ahead', title: 'The Promise Ahead' },
+      nextLesson: { slug: 'crossing-over', title: 'Crossing Over' }
+    },
+    {
+      slug: 'the-promise-ahead',
+      title: 'The Promise Ahead',
+      date: 'November 17, 2025',
+      scripture: 'Joshua 1:10–18',
+      series: "Joshua: Encouraged by What's Ahead",
+      quote: '"The Lord your God is giving you rest and has granted you this land."',
+      quoteRef: '— Joshua 1:13 (NIV)',
+      summary: [
+        "The book of Joshua opens with a promise: God is giving His people the land He swore to their ancestors. This isn't just about real estate—it's about fulfillment.",
+        "For 400 years in Egypt and 40 years in the wilderness, Israel waited. Now the wait is over. The promise is about to become reality.",
+        "But notice: the promise requires action. The people must rise, cross the Jordan, and take possession of what God is giving. Grace and responsibility work together.",
+        "What promises are you waiting on? How is God calling you to act in faith while you wait?"
+      ],
+      questions: [
+        "How do you balance waiting on God's promises with taking action?",
+        "The tribes east of the Jordan promised to help their brothers. How does community factor into receiving God's promises?",
+        "What does 'rest' mean in this passage? How does it apply to our lives today?",
+        "Where have you seen God fulfill His promises in your life?"
+      ],
+      prevLesson: null,
+      nextLesson: { slug: 'be-strong-and-courageous', title: 'Be Strong and Courageous' }
+    },
+  ];
+
+  return lessons.map(lesson => ({
+    params: { slug: lesson.slug },
+    props: { lesson }
+  }));
+}
+
+const { lesson } = Astro.props;
+---
+
+<Layout title={`${lesson.title} · Shipyard Church`} description={`${lesson.scripture} - Lesson notes and discussion questions from Shipyard Church.`}>
+  <Header activePage="gatherings" />
+
+  <section class="lesson-hero">
+    <div class="lesson-hero-bg"></div>
+    <div class="lesson-hero-overlay"></div>
+    <div class="lesson-hero-content">
+      <div class="lesson-hero-inner">
+        <a href="/gatherings" class="breadcrumb-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          {lesson.series}
+        </a>
+        <h1 class="lesson-hero-title">{lesson.title}</h1>
+        <p class="lesson-hero-meta">{lesson.date} <span>&middot;</span> {lesson.scripture}</p>
+      </div>
+    </div>
+  </section>
+
+  <main class="content">
+    <blockquote class="scripture-block">
+      <p class="scripture-text">{lesson.quote}</p>
+      <cite class="scripture-ref">{lesson.quoteRef}</cite>
+    </blockquote>
+
+    <section class="prose">
+      <h2>Summary</h2>
+      {lesson.summary.map((paragraph: string) => (
+        <p>{paragraph}</p>
+      ))}
+    </section>
+
+    <section class="questions">
+      <h2>Discussion Questions</h2>
+      <ol class="question-list">
+        {lesson.questions.map((question: string) => (
+          <li>{question}</li>
+        ))}
+      </ol>
+    </section>
+
+    <div class="download">
+      <div class="download-info">
+        <h3>Download Notes</h3>
+        <p>Print-friendly PDF with Scripture and discussion questions</p>
+      </div>
+      <a href="#" class="download-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        Download PDF
+      </a>
+    </div>
+
+    <nav class="lesson-nav" aria-label="Lesson navigation">
+      {lesson.prevLesson ? (
+        <a href={`/lesson/${lesson.prevLesson.slug}`} class="lesson-nav-link prev">
+          <span class="lesson-nav-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            Previous
+          </span>
+          <span class="lesson-nav-title">{lesson.prevLesson.title}</span>
+        </a>
+      ) : (
+        <div class="lesson-nav-link prev disabled"></div>
+      )}
+      {lesson.nextLesson ? (
+        <a href={`/lesson/${lesson.nextLesson.slug}`} class="lesson-nav-link next">
+          <span class="lesson-nav-label">
+            Next
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </span>
+          <span class="lesson-nav-title">{lesson.nextLesson.title}</span>
+        </a>
+      ) : (
+        <div class="lesson-nav-link next disabled"></div>
+      )}
+    </nav>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  /* Lesson Hero */
+  .lesson-hero {
+    position: relative;
+    min-height: 340px;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+
+  .lesson-hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 0%, rgba(92, 107, 74, 0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at 90% 80%, rgba(139, 90, 60, 0.12) 0%, transparent 40%),
+      linear-gradient(
+        135deg,
+        #3d3630 0%,
+        #4a433c 20%,
+        #5c5347 40%,
+        #5c6b4a 70%,
+        #4a5a3a 100%
+      );
+  }
+
+  .lesson-hero-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21.184 20c.357-.13.72-.264 1.088-.402l1.768-.661C33.64 15.347 39.647 14 50 14c10.271 0 15.362 1.222 24.629 4.928.955.383 1.869.74 2.75 1.072h6.225c-2.51-.73-5.139-1.691-8.233-2.928C65.888 13.278 60.562 12 50 12c-10.626 0-16.855 1.397-26.66 5.063l-1.767.662c-2.475.923-4.66 1.674-6.724 2.275h6.335zm0-20C13.258 2.892 8.077 4 0 4V2c5.744 0 9.951-.574 14.85-2h6.334zM77.38 0C85.239 2.966 90.502 4 100 4V2c-6.842 0-11.386-.542-16.396-2h-6.225zM0 14c8.44 0 13.718-1.21 22.272-4.402l1.768-.661C33.64 5.347 39.647 4 50 4c10.271 0 15.362 1.222 24.629 4.928C84.112 12.722 89.438 14 100 14v-2c-10.271 0-15.362-1.222-24.629-4.928C65.888 3.278 60.562 2 50 2 39.374 2 33.145 3.397 23.34 7.063l-1.767.662C13.223 10.84 8.163 12 0 12v2z' fill='%23ffffff' fill-opacity='0.015' fill-rule='evenodd'/%3E%3C/svg%3E");
+    opacity: 0.6;
+  }
+
+  .lesson-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(29, 25, 23, 0.92) 0%,
+      rgba(29, 25, 23, 0.65) 50%,
+      rgba(29, 25, 23, 0.35) 100%
+    );
+  }
+
+  .lesson-hero-content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+
+  .lesson-hero-inner {
+    max-width: 700px;
+  }
+
+  .breadcrumb-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--sand);
+    text-decoration: none;
+    margin-bottom: 1.25rem;
+    transition: gap 0.2s ease;
+  }
+
+  .breadcrumb-link:hover {
+    gap: 0.75rem;
+  }
+
+  .breadcrumb-link svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .lesson-hero-title {
+    font-family: 'Lora', Georgia, serif;
+    font-size: clamp(2rem, 5vw, 2.75rem);
+    font-weight: 500;
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.02em;
+  }
+
+  .lesson-hero-meta {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .lesson-hero-meta span {
+    margin: 0 0.5rem;
+    opacity: 0.4;
+  }
+
+  /* Content */
+  .content {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 3.5rem 2rem;
+  }
+
+  /* Scripture */
+  .scripture-block {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2.5rem;
+    border-left: 4px solid var(--sand);
+    box-shadow: 0 1px 3px rgba(61, 54, 48, 0.04);
+  }
+
+  .scripture-text {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    line-height: 1.8;
+    color: var(--warm-black);
+    margin-bottom: 0.875rem;
+  }
+
+  .scripture-ref {
+    font-family: 'Source Sans 3', sans-serif;
+    font-style: normal;
+    font-size: 0.85rem;
+    color: var(--rust);
+    font-weight: 600;
+  }
+
+  /* Prose */
+  .prose {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 1px 3px rgba(61, 54, 48, 0.04);
+  }
+
+  .prose h2 {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--warm-black);
+    margin-bottom: 1.25rem;
+  }
+
+  .prose p {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: var(--text-secondary);
+    margin-bottom: 1.25rem;
+  }
+
+  .prose p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Questions */
+  .questions {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 1px 3px rgba(61, 54, 48, 0.04);
+  }
+
+  .questions h2 {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--warm-black);
+    margin-bottom: 1.5rem;
+  }
+
+  .question-list {
+    list-style: none;
+    counter-reset: questions;
+  }
+
+  .question-list li {
+    counter-increment: questions;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--text-secondary);
+    padding: 1.125rem 0;
+    border-bottom: 1px solid var(--cream-dark);
+    padding-left: 2.75rem;
+    position: relative;
+  }
+
+  .question-list li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .question-list li::before {
+    content: counter(questions);
+    position: absolute;
+    left: 0;
+    top: 1.125rem;
+    width: 26px;
+    height: 26px;
+    background: var(--cream);
+    border-radius: 50%;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--rust);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Download */
+  .download {
+    background: var(--warm-black);
+    border-radius: 12px;
+    padding: 2rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  .download-info h3 {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 0.25rem;
+  }
+
+  .download-info p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    background: var(--sand);
+    color: var(--warm-black);
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.15s ease;
+  }
+
+  .download-btn:hover {
+    background: var(--sand-light);
+    transform: translateY(-1px);
+  }
+
+  .download-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Lesson Nav */
+  .lesson-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.25rem;
+  }
+
+  .lesson-nav-link {
+    flex: 1;
+    background: var(--white);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-decoration: none;
+    box-shadow: 0 1px 3px rgba(61, 54, 48, 0.04);
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
+  }
+
+  .lesson-nav-link.disabled {
+    visibility: hidden;
+  }
+
+  .lesson-nav-link:not(.disabled):hover {
+    box-shadow: 0 6px 20px rgba(61, 54, 48, 0.08);
+    transform: translateY(-2px);
+  }
+
+  .lesson-nav-link.prev {
+    text-align: left;
+  }
+
+  .lesson-nav-link.next {
+    text-align: right;
+  }
+
+  .lesson-nav-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--rust);
+    margin-bottom: 0.375rem;
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-weight: 600;
+  }
+
+  .lesson-nav-link.next .lesson-nav-label {
+    justify-content: flex-end;
+  }
+
+  .lesson-nav-label svg {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.2s ease;
+  }
+
+  .lesson-nav-link:hover .lesson-nav-label svg {
+    transform: translateX(-3px);
+  }
+
+  .lesson-nav-link.next:hover .lesson-nav-label svg {
+    transform: translateX(3px);
+  }
+
+  .lesson-nav-title {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--warm-black);
+  }
+
+  @media (max-width: 900px) {
+    .lesson-hero {
+      min-height: auto;
+    }
+
+    .lesson-hero-content {
+      padding: 2.5rem 1.5rem;
+    }
+
+    .lesson-hero-title {
+      font-size: 1.875rem;
+    }
+
+    .content {
+      padding: 2.5rem 1.5rem;
+    }
+
+    .scripture-block,
+    .prose,
+    .questions {
+      padding: 1.75rem 1.5rem;
+    }
+
+    .download {
+      flex-direction: column;
+      gap: 1.25rem;
+      text-align: center;
+      padding: 1.75rem 1.5rem;
+    }
+
+    .lesson-nav {
+      flex-direction: column;
+    }
+
+    .lesson-nav-link.next {
+      text-align: left;
+    }
+
+    .lesson-nav-link.next .lesson-nav-label {
+      justify-content: flex-start;
+    }
+  }
+</style>

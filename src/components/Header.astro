@@ -1,0 +1,246 @@
+---
+interface Props {
+  activePage?: 'about' | 'gatherings' | 'contact' | 'give';
+}
+
+const { activePage } = Astro.props;
+---
+
+<header class="header">
+  <div class="header-inner">
+    <a href="/" class="logo">Shipyard Church</a>
+    <nav class="nav">
+      <a href="/about" class:list={[{ active: activePage === 'about' }]}>About</a>
+      <a href="/gatherings" class:list={[{ active: activePage === 'gatherings' }]}>Gatherings</a>
+      <a href="/contact" class:list={[{ active: activePage === 'contact' }]}>Contact</a>
+      <a href="/give" class:list={['nav-give', { active: activePage === 'give' }]}>Give</a>
+    </nav>
+    <button class="hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <nav class="mobile-menu" aria-hidden="true">
+      <a href="/about">About</a>
+      <a href="/gatherings">Gatherings</a>
+      <a href="/contact">Contact</a>
+      <a href="/give" class="nav-give">Give</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const hamburger = document.querySelector('.hamburger');
+  const mobileMenu = document.querySelector('.mobile-menu');
+
+  hamburger?.addEventListener('click', () => {
+    const isOpen = hamburger.classList.toggle('active');
+    mobileMenu?.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+    mobileMenu?.setAttribute('aria-hidden', String(!isOpen));
+  });
+
+  // Close mobile menu when clicking a link
+  mobileMenu?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger?.classList.remove('active');
+      mobileMenu.classList.remove('open');
+      hamburger?.setAttribute('aria-expanded', 'false');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+    });
+  });
+</script>
+
+<style>
+  .header {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 64px;
+  }
+
+  .logo {
+    font-family: 'Lora', Georgia, serif;
+    font-weight: 500;
+    font-size: 1.35rem;
+    color: var(--warm-black);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+    transition: color 0.2s ease;
+  }
+
+  .logo:hover {
+    color: var(--rust);
+  }
+
+  .nav {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .nav a {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    position: relative;
+  }
+
+  .nav a.active {
+    color: var(--warm-black);
+  }
+
+  .nav a:not(.nav-give):hover {
+    color: var(--warm-black);
+  }
+
+  .nav a:not(.nav-give)::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--rust);
+    transition: width 0.25s ease;
+  }
+
+  .nav a:not(.nav-give):hover::after,
+  .nav a.active::after {
+    width: 100%;
+  }
+
+  .nav-give {
+    background: var(--olive);
+    color: var(--white) !important;
+    padding: 0.6rem 1.25rem;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.01em;
+    transition: background 0.2s ease, transform 0.15s ease;
+  }
+
+  .nav-give:hover {
+    background: var(--olive-dark);
+    transform: translateY(-1px);
+  }
+
+  .nav-give.active {
+    background: var(--olive-dark);
+  }
+
+  .nav-give::after {
+    display: none !important;
+  }
+
+  /* Hamburger */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 28px;
+    height: 28px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .hamburger span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: var(--warm-black);
+    border-radius: 2px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .hamburger.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Mobile menu */
+  .mobile-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 0;
+    box-shadow: 0 8px 24px rgba(61, 54, 48, 0.08);
+  }
+
+  .mobile-menu.open {
+    display: block;
+  }
+
+  .mobile-menu a {
+    display: block;
+    font-size: 1rem;
+    color: var(--warm-black);
+    text-decoration: none;
+    padding: 0.875rem 2rem;
+    text-align: center;
+    border-bottom: 1px solid var(--cream);
+    transition: background 0.15s ease;
+  }
+
+  .mobile-menu a:last-child {
+    border-bottom: none;
+  }
+
+  .mobile-menu a:hover {
+    background: var(--cream);
+  }
+
+  .mobile-menu .nav-give {
+    display: block;
+    margin: 1rem 2rem 0.5rem;
+    text-align: center;
+    border-bottom: none;
+  }
+
+  @media (max-width: 900px) {
+    .header-inner {
+      padding: 0 1.5rem;
+      height: 56px;
+    }
+
+    .logo {
+      font-size: 1.2rem;
+    }
+
+    .nav {
+      display: none;
+    }
+
+    .hamburger {
+      display: flex;
+    }
+  }
+</style>
